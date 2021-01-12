@@ -16,7 +16,7 @@ Thanks to this app you can:
 3. `POST /auth/login`
    1. Login to the app with username and password and get authorization token.
 4. `POST /auth/register`
-   1. Should be able to register to the app with username, password, name and role.
+   1. Register to the app with username, password, name and role.
    2. Possible options for role : basic or premium
 
 ⚠️ Don't forget to verify user's authorization token before processing the
@@ -65,7 +65,8 @@ npm start
 ## Run locally with docker
 
 1. Clone this repository
-1. Run from root dir
+2. Go to docker-compose.yml and paste the link that you got in the email under MONGO_URI
+3. Run from root dir
 
 ```
 docker-compose up -d
