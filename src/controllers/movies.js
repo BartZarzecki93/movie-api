@@ -2,33 +2,34 @@ const Movie = require('../models/Movie');
 const AuthError = require('../utils/errorAuth');
 const asyncHandler = require('../middleware/async');
 const { fetchMovie } = require('../utils/imdb');
+const {
+	memberships,
+} = require('../utils/membership');
 
 exports.createMovie = asyncHandler(
 	async (req, res, next) => {
+		//check for basic membership
+		if (req.user.role == 'basic') {
+			const count = await memberships(
+				req.user.id
+			);
+
+			if (count == 5) {
+				return next(
+					new AuthError(
+						`You already reached your limit (5 movies per month) in 2021`,
+						400
+					)
+				);
+			}
+		}
+
 		//fetch movie
 		const movieIMDB = await fetchMovie(
 			req.body.title
 		);
 
-		// Check for published bootcamp
-		const publishedBootcamp = await Movie.find({
-			user: req.user.id,
-		});
-
-		// // If the user is not an basic, they can only add 5 bootcamp in a month
-		if (
-			publishedBootcamp.length <= 5 &&
-			req.user.role == 'basic'
-		) {
-			console.log('I AM BASIC');
-			// return next(
-			// 	new AuthError(
-			// 		`The user with ID ${req.user.id} has already published a bootcamp`,
-			// 		400
-			// 	)
-			// );
-		}
-
+		//add movie to db
 		const movie = await Movie.create({
 			user: req.user.id,
 			title: movieIMDB.Title,

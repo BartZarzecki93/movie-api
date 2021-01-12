@@ -5,7 +5,7 @@ const AuthError = require('./errorAuth');
 exports.fetchMovie = asyncHandler(
 	async (name) => {
 		const movie = await fetch(
-			`https://www.omdbapi.com/?t=${name}&apikey=262b69da`
+			`https://www.omdbapi.com/?t=${name}&apikey=${process.env.IMDB_KEY}`
 		);
 
 		const fetchedMovie = await movie.json();

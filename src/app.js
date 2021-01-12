@@ -1,13 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const connectDB = require('../config/db');
+const connectDB = require('./config/db');
 const colors = require('colors');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('../swagger.json');
-const errorHandler = require('../middleware/error');
-const authRouter = require('../routes/auth');
-const movieRouter = require('../routes/movies');
+const swaggerDocument = require('./swagger.json');
+const errorHandler = require('./middleware/error');
+const authRouter = require('./routes/auth');
+const movieRouter = require('./routes/movies');
 // Load env vars
 dotenv.config({
 	path: './config/config.env',
@@ -37,6 +37,7 @@ app.use('/movies', movieRouter);
 
 app.use(errorHandler);
 
+//initial
 app.use((error, _, res, __) => {
 	console.error(
 		`Error processing request ${error}. See next message for details`

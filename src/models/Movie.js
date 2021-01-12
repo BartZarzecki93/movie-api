@@ -14,6 +14,10 @@ const MovieSchema = new mongoose.Schema({
 	released: {
 		type: Date,
 	},
+	createdAt: {
+		type: Date,
+		default: Date.now,
+	},
 	user: {
 		type: mongoose.Schema.ObjectId,
 		ref: 'User',

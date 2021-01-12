@@ -1,13 +1,14 @@
 {
   "name": "node-auth-svc",
   "version": "1.0.0",
-  "description": "",
+  "description": "Movie Api - Task Netguru",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=production node server.js",
+    "test": "NODE_ENV=testing jest --detectOpenHandles",
     "dev": "nodemon ./src/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Bartosz Zarzecki",
   "license": "",
   "dependencies": {
     "body-parser": "1.19.0",

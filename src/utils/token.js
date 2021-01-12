@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-const authFactory = (secret) => (user) => {
+exports.authFactory = (secret) => (user) => {
 	return jwt.sign(
 		{
 			userId: user._id,
@@ -9,13 +9,9 @@ const authFactory = (secret) => (user) => {
 		},
 		secret,
 		{
-			issuer: 'https://www.netguru.com/',
+			issuer: process.env.JWT_ISSUER,
 			subject: `${user._id}`,
-			expiresIn: 30 * 60,
+			expiresIn: process.env.JWT_EXPIRE,
 		}
 	);
-};
-
-module.exports = {
-	authFactory,
 };

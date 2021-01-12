@@ -1,9 +1,7 @@
 const asyncHandler = require('../middleware/async');
 const User = require('../models/User');
 const AuthError = require('../utils/errorAuth');
-const {
-	authFactory,
-} = require('../middleware/token');
+const { authFactory } = require('../utils/token');
 
 exports.register = asyncHandler(
 	async (req, res, next) => {
@@ -71,10 +69,6 @@ const sendToken = (
 			process.env.JWT_SECRET
 		)(user);
 
-		// req.headers.authorization =
-		// 	'Bearer ' + token;
-
-		// console.log(req.headers);
 		return res
 			.status(statusCode)
 			.json({ token });
