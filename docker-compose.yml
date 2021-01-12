@@ -1,14 +1,20 @@
-version: "3.2"
+version: '3.2'
 services:
-  app:
-    command: node src/server.js
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - published: ${APP_PORT:-3000}
-        target: 3000
-    volumes:
-      - .:/app/
-    environment:
-      JWT_SECRET: ${JWT_SECRET}
+   app:
+      command: node src/server.js
+      build:
+         context: .
+         dockerfile: Dockerfile
+      ports:
+         - published: ${APP_PORT:-3000}
+           target: 3000
+      volumes:
+         - .:/app/
+      environment:
+         JWT_SECRET: secret
+         MONGO_URI: mongodb+srv://bart123:bart123@cluster0.hcu1x.mongodb.net/movies-api?retryWrites=true&w=majority
+         NODE_ENV: development
+         JWT_EXPIRE: 30m
+         JWT_ISSUER: https://www.netguru.com/
+         IMDB_KEY: 262b69da
+         PORT: 3000

@@ -146,6 +146,12 @@
               "$ref": "#/definitions/Movie"
             }
           },
+          "400": {
+            "description": "Could not find a movie with provided title",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
           "401": {
             "description": "Not authorized to access this route",
             "schema": {

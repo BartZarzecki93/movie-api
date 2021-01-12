@@ -35,3 +35,29 @@ npm run dev
 # Run in prod mode
 npm start
 ```
+
+## Run locally with docker
+
+1. Clone this repository
+1. Run from root dir
+
+```
+docker-compose up -d
+```
+
+By default the auth service will start on port `3000`
+
+To stop the authorization service run
+
+```
+docker-compose down
+```
+
+## Documentation
+
+You can access full documentation(SWAGER) with
+
+```
+http://localhost:3000/api-docs/
+
+```

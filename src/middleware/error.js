@@ -16,14 +16,14 @@ const errorHandler = (err, req, res, next) => {
 
 	//Mongoose duplicate key
 	if (err.code == 11000) {
-		const message = `Duplicate field value entered, ${Object.keys(
+		const message = `Duplicate field value entered, provided ${Object.keys(
 			error.keyPattern
-		)}`;
+		)} already exists`;
 		error = new AuthError(message, 400);
 	}
 
 	//Mongoose validation error
-	if (err.name == 'ValidationError') {
+	if (err._message == 'User validation failed') {
 		const message = Object.values(
 			err.errors
 		).map((val) => val.message);

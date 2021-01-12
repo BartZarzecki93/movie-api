@@ -13,7 +13,7 @@ exports.fetchMovie = asyncHandler(
 		if (fetchedMovie.Response == 'False') {
 			throw new AuthError(
 				'Could not find a movie with provided title',
-				401
+				400
 			);
 		}
 

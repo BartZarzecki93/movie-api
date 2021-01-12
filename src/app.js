@@ -8,6 +8,7 @@ const swaggerDocument = require('./swagger.json');
 const errorHandler = require('./middleware/error');
 const authRouter = require('./routes/auth');
 const movieRouter = require('./routes/movies');
+const morgan = require('morgan');
 // Load env vars
 dotenv.config({
 	path: './config/config.env',
@@ -31,6 +32,11 @@ app.use(
 );
 
 app.use(bodyParser.json());
+
+// Dev logging middleware
+if (process.env.NODE_ENV === 'development') {
+	app.use(morgan('dev'));
+}
 
 app.use('/auth', authRouter);
 app.use('/movies', movieRouter);

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Movie Api - Task Netguru",
   "scripts": {
-    "start": "NODE_ENV=production node server.js",
+    "start": "NODE_ENV=production node ./src/server.js",
     "test": "NODE_ENV=testing jest --detectOpenHandles",
     "dev": "nodemon ./src/server.js"
   },
@@ -17,6 +17,7 @@
     "express": "4.17.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.1",
+    "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
     "swagger-ui-express": "^4.1.6"
   },
