@@ -4,8 +4,8 @@
 
 ## Usage
 
-Rename "config/config.env.env" to "config/config.env" and update the values/settings to your own or
-{
+Rename "config/config.env.env" to "config/config.env" and update the values/settings to your own or you can use:
+
 MONGO_URI = mongodb+srv://bart123:bart123@cluster0.hcu1x.mongodb.net/movies-api?retryWrites=true&w=majority
 
 PORT = 3000
@@ -16,7 +16,6 @@ JWT_EXPIRE=30m
 JWT_ISSUER=https://www.netguru.com/
 
 IMDB_KEY = 262b69da
-}
 
 ## Install Dependencies
 
