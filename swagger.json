@@ -1,0 +1,303 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Movies API",
+    "description": "Fully  working API for movies (Node Mongo)"
+  },
+  "host": "localhost:3000",
+  "tags": [
+    {
+      "name": "Movies",
+      "description": "API for movies in the system"
+    },
+    {
+      "name": "Authentication",
+      "description": "API for authentication in the system"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "jwt": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "authorization"
+    }
+  },
+  "paths": {
+    "/auth/register": {
+      "post": {
+        "summary": "Register",
+        "tags": [
+          "Authentication"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Registration fields",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Register"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          "400": {
+            "description": "Something wen wrong, check the message and try again",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "500": {
+            "description": "Failed",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "summary": "Login",
+        "tags": [
+          "Authentication"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Login fields",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Login"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          "400": {
+            "description": "User do not exist/Invalid credentials",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "500": {
+            "description": "Failed",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    },
+    "/movies": {
+      "post": {
+        "summary": "Create movie  - authorized users only",
+        "tags": [
+          "Movies"
+        ],
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Title field",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Title"
+            }
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          },
+          "401": {
+            "description": "Not authorized to access this route",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "500": {
+            "description": "Failed",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get all movies - authorized users only",
+        "tags": [
+          "Movies"
+        ],
+        "security": [
+          {
+            "jwt": []
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Movies"
+            }
+          },
+          "401": {
+            "description": "Not authorized to access this route",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          },
+          "500": {
+            "description": "Failed",
+            "schema": {
+              "$ref": "#/definitions/Message"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Register": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Token": {
+      "type": "object",
+      "properties": {
+        "token": {
+          "type": "string"
+        }
+      }
+    },
+    "Title": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        }
+      }
+    },
+    "Message": {
+      "properties": {
+        "success": {
+          "type": "boolean"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "Login": {
+      "type": "object",
+      "properties": {
+        "password": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        }
+      }
+    },
+    "Movie": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "string"
+        },
+        "data": {
+          "type": "object",
+          "properties": {
+            "_id": {
+              "type": "string"
+            },
+            "user": {
+              "type": "string"
+            },
+            "title": {
+              "type": "string"
+            },
+            "directory": {
+              "type": "string"
+            },
+            "genre": {
+              "type": "string"
+            },
+            "released": {
+              "type": "string"
+            },
+            "__v": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "Movies": {
+      "type": "object",
+      "properties": {
+        "success": {
+          "type": "string"
+        },
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Movie"
+          }
+        }
+      }
+    }
+  }
+}
