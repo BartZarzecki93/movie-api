@@ -50,4 +50,4 @@ jobs:
            with:
              context: .
              push: true
-             tags: movie-api/app:latest
+             tags: bartoszzarzecki93/movie-api:latest
