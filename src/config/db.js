@@ -1,7 +1,10 @@
 const { connect } = require('mongoose');
 
 const connectDB = async () => {
-	const dbURL = process.env.MONGO_URI;
+	const dbURL =
+		process.env.NODE_ENV === 'testing'
+			? process.env.MONGO_URI_TEST
+			: process.env.MONGO_URI;
 
 	const conn = await connect(dbURL, {
 		useNewUrlParser: true,
