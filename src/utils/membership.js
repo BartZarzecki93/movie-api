@@ -8,6 +8,7 @@ exports.memberships = asyncHandler(
 		//get current month
 		const todaysMonth =
 			new Date().getUTCMonth() + 1;
+		const todaysYear = new Date().getUTCFullYear();
 
 		const query = Movie.aggregate([
 			{
@@ -20,6 +21,9 @@ exports.memberships = asyncHandler(
 					month_added: {
 						$month: '$createdAt',
 					},
+					year_added: {
+						$year: '$createdAt',
+					},
 					title: '$_id',
 					_id: 0,
 				},
@@ -27,11 +31,12 @@ exports.memberships = asyncHandler(
 			{ $sort: { month_added: 1 } },
 		]);
 		const results = await query;
-
+		console.log(results);
 		//count movies in the current month
 		const count = results.filter(
 			(movie) =>
-				movie.month_added == todaysMonth
+				movie.month_added == todaysMonth &&
+				movie.year_added == todaysYear
 		);
 
 		return count.length;
