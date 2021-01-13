@@ -35,11 +35,17 @@ jobs:
               JWT_ISSUER: https://www.netguru.com/
               IMDB_KEY: 262b69da
               PORT: 3000
-
-         - name: Publish Docker
+         - name: Setup Docker Buildx
+           uses: docker/setup-buildx-action@v1
+         - name: Login Docker
            if: success()
-           uses: docker/build-push-action@v2
+           uses: docker/login-action@v1
            with:
-               name: movie-api/nodejs_githubactions
                username: ${{ secrets.DOCKER_USERNAME }}
                password: ${{ secrets.DOCKER_PASSWORD }}
+         - name: Build and push
+           id: docker_build
+           uses: docker/build-push-action@v2
+           with:
+             push: true
+             tags: movie-api/app:latest
