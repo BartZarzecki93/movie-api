@@ -6,9 +6,8 @@ const Movie = require('../models/Movie');
 exports.memberships = asyncHandler(
 	async (userId) => {
 		//get current month
-		const todaysDate = new Date();
 		const todaysMonth =
-			todaysDate.getUTCMonth() + 1;
+			new Date().getUTCMonth() + 1;
 
 		const query = Movie.aggregate([
 			{

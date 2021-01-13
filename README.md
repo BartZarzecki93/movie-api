@@ -31,7 +31,7 @@ Authorization: Bearer <token>
 Rename "config/config.env.env" to "config/config.env" and update the values/settings to your own or you can use:
 
 ```
-MONGO_URI = (will be send in ab email with the repo link)
+MONGO_URI = (will be send in an email)
 
 PORT = 3000
 
@@ -50,6 +50,12 @@ IMDB_KEY = 262b69da
 
 ```
 npm install
+```
+
+## Testing with jest
+
+```
+npm run test
 ```
 
 ## Run App
@@ -73,6 +79,18 @@ docker-compose up -d
 ```
 
 By default the auth service will start on port `3000`
+
+To test or use api please go to:
+
+```
+http://localhost:3000/api-docs/
+
+```
+
+Register as a new user or use the username and password from example.json file to login.
+If you register/login correctly, copy generated token and paste into the authorization window (Bearer + "token") that will pop out after clicking on Authorize button in the top right corner. After pasting the full authorization token in the pop window, click authorize.
+
+After that process you will be able to create and get movies. (Following the rules that are described at the top of the Readme page)
 
 To stop the service run
 

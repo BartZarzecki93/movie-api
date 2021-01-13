@@ -3,12 +3,12 @@ const {
 	createMovie,
 	getMovies,
 } = require('../controllers/movies');
-
-//Routes
-const router = Router();
 const {
 	protect,
 } = require('../middleware/protect');
+
+//Routes
+const router = Router();
 
 router.post('', protect, createMovie);
 router.get('', protect, getMovies);

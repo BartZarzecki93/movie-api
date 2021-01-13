@@ -25,25 +25,27 @@ if (!process.env.JWT_SECRET) {
 
 const app = express();
 
+//swagger documentation
 app.use(
 	'/api-docs',
 	swaggerUi.serve,
 	swaggerUi.setup(swaggerDocument)
 );
 
+//body parser
 app.use(bodyParser.json());
 
-// Dev logging middleware
-if (process.env.NODE_ENV === 'development') {
-	app.use(morgan('dev'));
-}
+//logging middleware
+app.use(morgan('dev'));
 
+//routes
 app.use('/auth', authRouter);
 app.use('/movies', movieRouter);
 
+//error handling middleware
 app.use(errorHandler);
 
-//initial
+//initial error handling
 app.use((error, _, res, __) => {
 	console.error(
 		`Error processing request ${error}. See next message for details`
