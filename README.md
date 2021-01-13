@@ -32,6 +32,7 @@ Rename "config/config.env.env" to "config/config.env" and update the values/sett
 
 ```
 MONGO_URI = (will be send in an email)
+MONGO_URI_TEST = (will be send in an email)
 
 PORT = 3000
 
