@@ -106,3 +106,7 @@ You can access full documentation(SWAGER) with
 http://localhost:3000/api-docs/
 
 ```
+
+## Github Actions
+
+![](images/success.png)
