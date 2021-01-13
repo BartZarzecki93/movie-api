@@ -4,35 +4,34 @@
 name: Node.js CI
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+   push:
+      branches: [main]
+   pull_request:
+      branches: [main]
 
 jobs:
-  build:
+   build:
+      runs-on: ubuntu-latest
 
-    runs-on: ubuntu-latest
+      strategy:
+         matrix:
+            node-version: [10.x]
+            # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
-    strategy:
-      matrix:
-        node-version: [10.x, 15.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-      env: 
-        MONGO_URI: mongodb+srv://bart123:bart123@cluster0.hcu1x.mongodb.net/movies-api?retryWrites=true&w=majority
-        JWT_SECRET: secret
-        MONGO_URI_TEST: mongodb+srv://bart123:bart123@cluster0.hcu1x.mongodb.net/movies-api-test?retryWrites=true&w=majority
-        JWT_EXPIRE: 30m
-        JWT_ISSUER: https://www.netguru.com/
-        IMDB_KEY: 262b69da
-        PORT: 3000
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm run test
+      steps:
+         - uses: actions/checkout@v2
+         - name: Use Node.js ${{ matrix.node-version }}
+           uses: actions/setup-node@v1
+           with:
+              node-version: ${{ matrix.node-version }}
+         - run: npm ci
+         - run: npm run build --if-present
+         - run: npm run test
+           env:
+              MONGO_URI: mongodb+srv://bart123:bart123@cluster0.hcu1x.mongodb.net/movies-api?retryWrites=true&w=majority
+              JWT_SECRET: secret
+              MONGO_URI_TEST: mongodb+srv://bart123:bart123@cluster0.hcu1x.mongodb.net/movies-api-test?retryWrites=true&w=majority
+              JWT_EXPIRE: 30m
+              JWT_ISSUER: https://www.netguru.com/
+              IMDB_KEY: 262b69da
+              PORT: 3000
