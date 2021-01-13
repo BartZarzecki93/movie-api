@@ -145,6 +145,7 @@ describe(moviesUrl, () => {
 		}).then((movie) => {
 			expect(movie).not.toBeNull();
 			expect(movie.title).toBe('Holt');
+			expect(movie._id).not.toBe(null);
 		});
 	});
 
@@ -156,6 +157,21 @@ describe(moviesUrl, () => {
 		expect(response.body.success).toBe(false);
 		expect(response.body.error).toBe(
 			'Not authorized to access this route'
+		);
+	});
+
+	it(`POST  ${moviesUrl} should return movie error`, async () => {
+		const response = await request
+			.post(moviesUrl)
+			.set('Authorization', `Bearer ${token}`)
+			.send({
+				title: 'Holtsdfsdf',
+			})
+			.expect(400);
+
+		expect(response.body.success).toBe(false);
+		expect(response.body.error).toBe(
+			'Could not find a movie with provided title'
 		);
 	});
 });
