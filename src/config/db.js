@@ -2,7 +2,7 @@ const { connect } = require('mongoose');
 
 const connectDB = async () => {
 	const dbURL =
-		process.env.NODE_ENV === 'testing'
+		process.env.NODE_ENV === 'test'
 			? process.env.MONGO_URI_TEST
 			: process.env.MONGO_URI;
 
