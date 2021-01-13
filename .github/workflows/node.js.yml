@@ -35,10 +35,11 @@ jobs:
               JWT_ISSUER: https://www.netguru.com/
               IMDB_KEY: 262b69da
               PORT: 3000
+
           - name: Publish Docker
-              if: success()
-              uses: elgohr/Publish-Docker-Github-Action@2.11
-              with:
-                name: movie-api/nodejs_githubactions
-                username: ${{ secrets.DOCKERHUB_USER }}
-                password: ${{ secrets.DOCKERHUB_PASS }}
+            if: success()
+            uses: elgohr/Publish-Docker-Github-Action@2.11
+            with:
+              name: movie-api/nodejs_githubactions
+              username: ${{ secrets.DOCKERHUB_USER }}
+              password: ${{ secrets.DOCKERHUB_PASS }}
